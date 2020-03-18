@@ -1,24 +1,33 @@
-const { MongoClient } = require('mongodb');
+require('dotenv').config()
+const { MongoClient } = require('mongodb')
 
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
-
-async function main() {
-    const uri = "mongodb://mongo:27017/orders_worker";
-    const client = new MongoClient(uri);
- 
-    try {
-        await client.connect();
-        await  listDatabases(client);
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
+async function processOrders(db){
+    const collection = db.collection('orders')
+    orders = await collection.find({}).toArray()
+    orders.map(order => {
+      console.log(order)
+    })
 }
 
-main().catch(console.error);
+async function main() {
+  const dbUser = process.env.DB_USERNAME
+  const dbPass = process.env.DB_PASSWORD
+  const dbName = process.env.DB_DATABASE
+  const uri = `mongodb://${dbUser}:${dbPass}@mongo:27017/${dbName}`
+  console.log(uri)
+  const client = new MongoClient(uri)
+
+  try {
+      await client.connect()
+
+      const db = client.db(dbName)
+
+      await processOrders(db)
+  } catch (e) {
+      console.error(e)
+  } finally {
+      await client.close()
+  }
+}
+
+main().catch(console.error)
