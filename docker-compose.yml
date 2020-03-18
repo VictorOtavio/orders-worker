@@ -6,9 +6,9 @@ services:
       context: .
       dockerfile: ./Dockerfile-mongo
       args:
-        - DB_USERNAME=root
-        - DB_PASSWORD=secret
-        - DB_DATABASE=orders_worker
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_DATABASE=${DB_DATABASE}
     networks:
       - app-network
 
