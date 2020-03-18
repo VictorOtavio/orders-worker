@@ -1,0 +1,16 @@
+FROM node:12 AS build-stage
+ARG DB_USERNAME
+ARG DB_PASSWORD
+ARG DB_DATABASE
+COPY seed.csv /tmp
+RUN npm install -g csvtojson \
+ && echo "db.${DB_DATABASE}.drop();" >> /tmp/seed.js \
+ && echo "db.${DB_DATABASE}.insertMany(" >> /tmp/seed.js \
+ && csvtojson /tmp/seed.csv --delimiter=';' >> /tmp/seed.js \
+ && echo ");" >> /tmp/seed.js
+
+FROM mongo:4 AS production-stage
+ENV MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME} \
+    MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD} \
+    MONGO_INITDB_DATABASE=${DB_DATABASE}
+COPY --from=build-stage /tmp/seed.js /docker-entrypoint-initdb.d/

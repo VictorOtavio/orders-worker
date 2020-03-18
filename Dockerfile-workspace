@@ -1,2 +1,3 @@
 FROM node:12
+USER 1000
 CMD ["tail", "-f", "/dev/null"]

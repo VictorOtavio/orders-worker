@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  mongo:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-mongo
+      args:
+        - DB_USERNAME=root
+        - DB_PASSWORD=secret
+        - DB_DATABASE=orders_worker
+    networks:
+      - app-network
+
   workspace:
     build:
       context: .
