@@ -6,12 +6,15 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js"
+    "serve": "nodemon index.js -w src",
+    "services": "pm2 start processes.json"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.5"
+    "mongoose": "^5.9.5",
+    "pm2": "^4.2.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

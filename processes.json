@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "invoice-api",
+      "cwd": "./invoice-api",
+      "script": "npm",
+      "args": "start"
+    },
+    {
+      "name": "transfer-api",
+      "cwd": "./transfer-api",
+      "script": "npm",
+      "args": "start"
+    }
+  ]
+}
