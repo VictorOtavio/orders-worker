@@ -8,7 +8,9 @@ const orderSchema = new db.Schema({
   price: String,
   cartID: String,
   partnerID: String,
-  customerID: String
+  customerID: String,
+  invoiceID: String,
+  transferID: String
 })
 
 module.exports = db.model('Order', orderSchema)
