@@ -6,8 +6,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js",
-    "start": "pm2 start processes.json"
+    "serve": "nodemon index.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
