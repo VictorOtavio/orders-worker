@@ -1,0 +1,16 @@
+{
+  "name": "orders-worker",
+  "version": "1.0.0",
+  "description": "Service that process a queue of orders for a marketplace",
+  "author": "Victor Otávio Ferreira <victor@otavioferreira.com.br>",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.5.5"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "standard": "^14.3.3"
+  }
+}
