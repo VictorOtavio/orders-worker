@@ -63,3 +63,7 @@ Accept: application/json
 ```
 
 Executes the queue for a given order and returns the data.
+
+## License
+
+[MIT](LICENSE)
