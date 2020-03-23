@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mongo:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-mongo
+      args:
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_DATABASE=${DB_DATABASE}
+    networks:
+      - app-network
+
+  workspace:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-workspace
+    volumes:
+      - .:/app
+    working_dir: /app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
