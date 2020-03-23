@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
+    "start": "npm run services && npm run serve",
     "serve": "nodemon index.js -w src",
     "services": "pm2 start processes.json"
   },

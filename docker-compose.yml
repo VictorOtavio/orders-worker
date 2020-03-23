@@ -6,21 +6,26 @@ services:
       context: .
       dockerfile: ./Dockerfile-mongo
       args:
-        - DB_USERNAME=${DB_USERNAME}
-        - DB_PASSWORD=${DB_PASSWORD}
-        - DB_DATABASE=${DB_DATABASE}
+        DB_USERNAME: ${DB_USERNAME}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_DATABASE: ${DB_DATABASE}
+    ports: 
+      - "${DB_PORT}:${DB_PORT}"
     networks:
       - app-network
 
-  workspace:
+  app:
     build:
       context: .
-      dockerfile: ./Dockerfile-workspace
+      dockerfile: ./Dockerfile-app
+      args:
+        DB_HOST: mongo
+        DB_PORT: ${DB_PORT}
+        APP_PORT: ${APP_PORT}
     ports: 
       - "${APP_PORT}:${APP_PORT}"
-    volumes:
-      - .:/app
-    working_dir: /app
+    depends_on:
+      - mongo
     networks:
       - app-network
 
