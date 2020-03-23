@@ -1,15 +1,19 @@
+const Order = require('../models/order')
+
 module.exports = {
-  fetchAll () {
-    return [
-      { asdf: '1234' }
-    ]
+  async fetchAll () {
+    const orders = await Order.find()
+    return orders
   },
 
-  store (model) {
-    return model
+  async store (data) {
+    const order = new Order(data)
+    await order.save()
+    return order
   },
 
-  show (id) {
-    return { id }
+  async show (id) {
+    const order = await Order.findById(id)
+    return order
   }
 }

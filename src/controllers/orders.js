@@ -1,18 +1,18 @@
 const ordersRepository = require('../repositories/orders')
 
 module.exports = {
-  index (req, res) {
-    const orders = ordersRepository.fetchAll()
+  async index (req, res) {
+    const orders = await ordersRepository.fetchAll()
     res.json(orders)
   },
 
-  store (req, res) {
-    const order = ordersRepository.store(req.body)
+  async store (req, res) {
+    const order = await ordersRepository.store(req.body)
     res.status(201).json(order)
   },
 
-  show (req, res) {
-    const order = ordersRepository.show(req.params.id)
+  async show (req, res) {
+    const order = await ordersRepository.show(req.params.id)
     res.json(order)
   }
 }
